@@ -1,0 +1,66 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+     
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = 'Main'
+
+jar {
+    baseName = 'mongocat'
+    version =  '0.1.0'
+    
+     manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+
+
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+run{
+    standardInput = System.in
+}
+
+dependencies {
+     compile 'org.springframework:spring-context:4.1.1.RELEASE'
+     compile 'org.springframework.data:spring-data-mongodb:1.6.0.RELEASE'
+     compile 'org.mongodb:mongo-java-driver:2.12.4'
+     
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
